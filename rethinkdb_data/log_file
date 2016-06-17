@@ -96,3 +96,6 @@
 2016-06-17T11:53:17.627440000 2.648873s info: Table e1ddaf8b-5a06-453c-8adf-98fa2fa7d68e: Starting a new Raft election for term 4.
 2016-06-17T11:53:17.685894000 2.707326s info: Table 513f8041-35b6-4c37-a66d-2e436bdece6a: This server is Raft leader for term 4. Latest log index is 9.
 2016-06-17T11:53:18.422221000 3.443654s info: Table e1ddaf8b-5a06-453c-8adf-98fa2fa7d68e: This server is Raft leader for term 4. Latest log index is 13.
+2016-06-17T13:20:49.545383000 5254.452568s info: Table ad09c991-7217-47dd-8146-5b11999c51ce: Starting a new Raft election for term 1.
+2016-06-17T13:20:49.545849000 5254.453034s info: Table ad09c991-7217-47dd-8146-5b11999c51ce: Added replica on this server.
+2016-06-17T13:20:49.923993000 5254.831178s info: Table ad09c991-7217-47dd-8146-5b11999c51ce: This server is Raft leader for term 1. Latest log index is 0.
