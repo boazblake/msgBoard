@@ -1,0 +1,6 @@
+.center {
+  margin: auto;
+  border: 1px solid magenta;
+  border-radius: 2px;
+  padding: 10px;
+}
