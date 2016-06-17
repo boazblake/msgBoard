@@ -17,10 +17,12 @@ class Messages extends React.Component {
   componentDidMount() {
     this.chat.watch().subscribe(
       (messages) => {
-        let convo = messages.map((message) => {
-          return message
-        });
-        this.setState({convo});
+        let allMSGS = messages.sort((a, b) => {
+          //this will return an array where the messages are sorted in
+          //descending order by time
+          return b.date - a.date;
+        })
+        this.setState({convo: allMSGS});
       },
       (err) => {
         console.log('err', err)

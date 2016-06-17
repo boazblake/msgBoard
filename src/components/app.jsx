@@ -46,9 +46,11 @@ handleSendMessage() {
     toastr["error"]("invalid Submission!");
     return;
   }
+  let now = Date.now();
   let message ={
     text: this.state.text,
-    author: this.state.author
+    author: this.state.author,
+    date: now
   };
   //the store methos will take the new message and store in the rethink DBcollection
   chat.store(message);
