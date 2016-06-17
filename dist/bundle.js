@@ -30071,7 +30071,7 @@
 /* 554 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -30101,6 +30101,8 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _removeTaskButton = __webpack_require__(689);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var Message = function (_Component) {
@@ -30112,38 +30114,59 @@
 	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Message).call(this, props));
 
 	    _this.props = props;
+
+	    //set the state for changing background on tick
+	    _this.state = {
+	      taskBkgColor: '#ecf0f1'
+	    };
+
+	    _this.handleBackground = _this.handleBackground.bind(_this);
 	    return _this;
 	  }
 
 	  (0, _createClass3.default)(Message, [{
-	    key: "render",
+	    key: 'handleBackground',
+	    value: function handleBackground() {
+	      if (this.state.taskBkgColor === '#ecf0f1') {
+	        return this.setState({
+	          taskBkgColor: '#2ecc71'
+	        });
+	      } else {
+	        return this.setState({
+	          taskBkgColor: '#ecf0f1'
+	        });
+	      }
+	    }
+	  }, {
+	    key: 'render',
 	    value: function render() {
+	      var divStyle = {
+	        backgroundColor: this.state.taskBkgColor
+	      };
+
 	      return _react2.default.createElement(
-	        "div",
-	        { className: "row" },
+	        'div',
+	        { className: 'row' },
 	        _react2.default.createElement(
-	          "div",
-	          { className: "col-xs-2 center" },
+	          'div',
+	          { style: divStyle, className: 'col-xs-2 center' },
 	          this.props.msg.author
 	        ),
 	        _react2.default.createElement(
-	          "div",
-	          { className: "col-xs-8 center" },
+	          'div',
+	          { style: divStyle, className: 'col-xs-8 center' },
 	          this.props.msg.text
 	        ),
 	        _react2.default.createElement(
-	          "div",
-	          { className: "col-xs-2" },
+	          'div',
+	          { className: 'col-xs-2' },
 	          _react2.default.createElement(
-	            "button",
-	            { className: "btn btn-danger" },
-	            "X"
+	            'button',
+	            { className: 'btn btn-success',
+	              onClick: this.handleBackground },
+	            _react2.default.createElement('span', { className: 'glyphicon glyphicon-ok' })
 	          ),
-	          _react2.default.createElement(
-	            "button",
-	            { className: "btn btn-success" },
-	            _react2.default.createElement("span", { className: "glyphicon glyphicon-ok" })
-	          )
+	          _react2.default.createElement(_removeTaskButton.RemoveTaskButton, null)
 	        )
 	      );
 	    }
@@ -51562,6 +51585,64 @@
 	    return DoSubscriber;
 	}(Subscriber_1.Subscriber));
 	//# sourceMappingURL=do.js.map
+
+/***/ },
+/* 689 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.RemoveTaskButton = undefined;
+
+	var _getPrototypeOf = __webpack_require__(467);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(493);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(494);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(498);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(545);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _react = __webpack_require__(300);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var RemoveTaskButton = exports.RemoveTaskButton = function (_React$Component) {
+	  (0, _inherits3.default)(RemoveTaskButton, _React$Component);
+
+	  function RemoveTaskButton() {
+	    (0, _classCallCheck3.default)(this, RemoveTaskButton);
+	    return (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(RemoveTaskButton).apply(this, arguments));
+	  }
+
+	  (0, _createClass3.default)(RemoveTaskButton, [{
+	    key: "render",
+	    value: function render() {
+	      return _react2.default.createElement(
+	        "button",
+	        { className: "btn btn-danger" },
+	        "X"
+	      );
+	    }
+	  }]);
+	  return RemoveTaskButton;
+	}(_react2.default.Component);
 
 /***/ }
 /******/ ]);
