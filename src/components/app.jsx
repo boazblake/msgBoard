@@ -61,9 +61,10 @@ handleSendMessage() {
       <div>
         <form>
         <div className="center">
-          <button onClick={this.handleSendMessage}>Send a Message</button>
           <input onChange={this.handleChangeAuthor} placeholder="Name"/>
           <input onChange={this.handleChangeMessage} placeholder="Message"/>
+          <button className="btn btn-default"
+                  onClick={this.handleSendMessage}>Send a Message</button>
         </div>
         </form>
         <Messages chat={chat}/>
