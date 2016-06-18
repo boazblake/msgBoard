@@ -1,3 +1,6 @@
+.body:focus {
+  outline: none;
+}
 .center {
   margin: auto;
   border: 1px solid magenta;

@@ -1,5 +1,5 @@
 {
-  "name": "chatterbox",
+  "name": "msgboard",
   "version": "1.0.0",
   "description": "react, webpack and horizon db",
   "main": "index.js",

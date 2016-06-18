@@ -7,8 +7,8 @@ import toastr from 'toastr';
 const Horizon = require('@horizon/client');
 const horizon = Horizon({ secure: false });
 
-//This init the 'messages' collection inside of the ReThinkDb
-const chat = horizon('messages');
+//This init the 'messages_msgBoard' collection inside of the ReThinkDb
+const chat = horizon('messages_msgBoard');
 
 class App extends React.Component {
 //init our state with the built in constructor function
@@ -20,14 +20,14 @@ constructor(props){
     text: ''
   }
   this.handleChangeAuthor = this.handleChangeAuthor.bind(this),
-  this.handleChangeMessage = this.handleChangeMessage.bind(this),
+  this.handleChangeText = this.handleChangeText.bind(this),
   this.handleSendMessage = this.handleSendMessage.bind(this)
 }
 
 componentDidMount() {
   chat.watch().subscribe(
-    (messages) => {
-      let allMSGS = messages.sort((a, b) => {
+    (messages_msgBoard) => {
+      let allMSGS = messages_msgBoard.sort((a, b) => {
         return b.date - a.date;
       })
       this.setState({convo: allMSGS});
@@ -46,7 +46,7 @@ handleChangeAuthor(event) {
   )
 }
 
-handleChangeMessage(event) {
+handleChangeText(event) {
   this.setState(
     {
       text:event.target.value
@@ -64,25 +64,21 @@ handleSendMessage() {
   let message ={
     text: this.state.text,
     author: this.state.author,
-    date: now
+    date: now,
+    status: false
   };
   //the store methos will take the new message and store in the rethink DBcollection
   chat.store(message);
 }
 
-//passing chat as a prop to messages component for querying the db for messages
+//passing chat as a prop to messages_msgBoard component for querying the db for messages_msgBoard
 
   render(){
     return (
       <div>
-        <form>
-        <div className="center">
-          <input onChange={this.handleChangeAuthor} placeholder="Name"/>
-          <input onChange={this.handleChangeMessage} placeholder="Message"/>
-          <button className="btn btn-default"
-                  onClick={this.handleSendMessage}>Send a Message</button>
-        </div>
-        </form>
+        <ChatContainer sendMessage={this.handleSendMessage}
+                       changeAuthor={this.handleChangeAuthor}
+                       changeText={this.handleChangeText}/>
         <Messages convo={this.state.convo}/>
       </div>
     );
