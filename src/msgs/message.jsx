@@ -25,13 +25,14 @@ export default class Message extends Component {
   handleOnSelect() {
     
     if (this.state.msgStatus){
-      console.log()
-     return chat.update({
+      console.log(this.state.msgStatus)
+      chat.upsert({
         id:this.props.msg.id,
         msgSelected: false
       })
     } else {
-     return chat.update({
+      console.log(this.state.msgStatus)
+      chat.upsert({
         id:this.props.msg.id,
         msgSelected: true
       })
