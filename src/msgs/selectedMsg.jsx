@@ -6,7 +6,7 @@ export default class SelectedMsg extends React.Component {
     this.props = props;
     
     this.state = {
-      status: this.props.status
+      msgSelected: this.props.msgSelected
     }
   }
 

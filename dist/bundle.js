@@ -28433,7 +28433,7 @@
 	        text: this.state.text,
 	        author: this.state.author,
 	        date: now,
-	        status: false
+	        msgSelected: false
 	      };
 	      //the store methos will take the new message and store in the rethink DBcollection
 	      chat.store(message);
@@ -30117,11 +30117,14 @@
 
 	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Message).call(this, props));
 
-	    var selectedMsg = _this.props.msg.status;
+	    var msgStatus = _this.props.msg.msgSelected;
+	    var bkgColor = void 0;
+	    if (msgStatus) bkgColor = '#3498db';
+	    if (!msgStatus) bkgColor = '#bdc3c7';
 
 	    _this.state = {
-	      selected: { selectedMsg: selectedMsg },
-	      bkgColor: '#bdc3c7'
+	      msgStatus: msgStatus,
+	      bkgColor: bkgColor
 	    };
 
 	    _this.handleOnSelect = _this.handleOnSelect.bind(_this);
@@ -30131,16 +30134,19 @@
 	  (0, _createClass3.default)(Message, [{
 	    key: 'handleOnSelect',
 	    value: function handleOnSelect() {
-	      //add a switch or if else
 
-	      chat.update({
-	        id: this.props.msg.id,
-	        status: true
-	      });
-
-	      return this.setState({
-	        bkgColor: '#3498db'
-	      });
+	      if (this.state.msgStatus) {
+	        console.log();
+	        return chat.update({
+	          id: this.props.msg.id,
+	          msgSelected: false
+	        });
+	      } else {
+	        return chat.update({
+	          id: this.props.msg.id,
+	          msgSelected: true
+	        });
+	      }
 	    }
 	  }, {
 	    key: 'render',
@@ -30171,7 +30177,7 @@
 	          'div',
 	          { className: 'col-xs-2 center' },
 	          _react2.default.createElement(_removeMsg2.default, { id: this.props.msg.id }),
-	          _react2.default.createElement(_selectedMsg2.default, { selectMsg: this.handleOnSelect, status: this.state.selected })
+	          _react2.default.createElement(_selectedMsg2.default, { selectMsg: this.handleOnSelect, msgSelected: this.state.selected })
 	        )
 	      );
 	    }
@@ -65492,7 +65498,7 @@
 	    _this.props = props;
 
 	    _this.state = {
-	      status: _this.props.status
+	      msgSelected: _this.props.msgSelected
 	    };
 	    return _this;
 	  }

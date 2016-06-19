@@ -9,31 +9,33 @@ const chat = horizon('messages_msgBoard');
 export default class Message extends Component {
   constructor(props){
     super(props);
-    let selectedMsg = this.props.msg.status;
+    let msgStatus = this.props.msg.msgSelected;
+    let bkgColor;
+    if (msgStatus) bkgColor = '#3498db';
+    if (!msgStatus) bkgColor = '#bdc3c7';
 
     this.state = {
-      selected: {selectedMsg},
-      bkgColor: '#bdc3c7'
+      msgStatus: msgStatus,
+      bkgColor: bkgColor
     }      
 
     this.handleOnSelect = this.handleOnSelect.bind(this);
   }
 
-
   handleOnSelect() {
-    //add a switch or if else 
-
-
-    chat.update({
-      id:this.props.msg.id,
-      status:true
-    })
-
-   return this.setState({
-    bkgColor: '#3498db'
-    })
-
-
+    
+    if (this.state.msgStatus){
+      console.log()
+     return chat.update({
+        id:this.props.msg.id,
+        msgSelected: false
+      })
+    } else {
+     return chat.update({
+        id:this.props.msg.id,
+        msgSelected: true
+      })
+    }
   }
 
   render() { 
@@ -55,7 +57,7 @@ export default class Message extends Component {
         </div>
         <div className="col-xs-2 center">
           <RemoveMsg id={this.props.msg.id}/>
-          <SelectedMsg selectMsg={this.handleOnSelect} status={this.state.selected}/>
+          <SelectedMsg selectMsg={this.handleOnSelect} msgSelected={this.state.selected}/>
         </div>
       </div>
     );

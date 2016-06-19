@@ -65,7 +65,7 @@ handleSendMessage() {
     text: this.state.text,
     author: this.state.author,
     date: now,
-    status: false
+    msgSelected: false
   };
   //the store methos will take the new message and store in the rethink DBcollection
   chat.store(message);
