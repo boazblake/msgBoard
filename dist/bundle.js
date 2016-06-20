@@ -30062,10 +30062,6 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var Horizon = __webpack_require__(660);
-	var horizon = Horizon({ secure: false });
-	var chat = horizon('messages_msgBoard');
-
 	var Message = function (_Component) {
 	  (0, _inherits3.default)(Message, _Component);
 
@@ -30075,41 +30071,31 @@
 	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Message).call(this, props));
 
 	    var msgStatus = _this.props.msg.msgSelected;
-	    var bkgColor = msgStatus ? '#3498db' : '#bdc3c7';
 
 	    _this.state = {
-	      msgStatus: msgStatus,
-	      bkgColor: bkgColor
+	      msgStatus: msgStatus
 	    };
-
-	    _this.handleOnSelect = _this.handleOnSelect.bind(_this);
 	    return _this;
 	  }
 
 	  (0, _createClass3.default)(Message, [{
-	    key: 'handleOnSelect',
-	    value: function handleOnSelect() {
-	      var selected = {
-	        id: this.props.msg.id,
-	        msgSelected: false
-	      };
+	    key: 'componentWillReceiveProps',
+	    value: function componentWillReceiveProps(nextProps) {
+	      console.log('nextProps>>>', nextProps);
+	      var msgStatus = nextProps.msgSelected;
+	      var bkgColor = msgStatus ? '#3498db' : '#bdc3c7';
 
-	      var unSelected = {
-	        id: this.props.msg.id,
-	        msgSelected: true
+	      this.setState = {
+	        msgStatus: msgStatus
 	      };
-
-	      var msgSelectionStatus = this.state.msgStatus ? selected : unSelected;
-	      chat.update(msgSelectionStatus);
-	      this.setState({
-	        msgStatus: !this.state.msgStatus
-	      });
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var bkgColor = this.props.msg.msgSelected ? '#3498db' : '#bdc3c7';
+
 	      var divStyle = {
-	        backgroundColor: this.state.bkgColor
+	        backgroundColor: this.props.bkgColor
 	      };
 
 	      return _react2.default.createElement(
@@ -30134,7 +30120,7 @@
 	          'div',
 	          { className: 'col-xs-2 center' },
 	          _react2.default.createElement(_removeMsg2.default, { id: this.props.msg.id }),
-	          _react2.default.createElement(_selectedMsg2.default, { selectMsg: this.handleOnSelect, msgSelected: this.state.msgStatus })
+	          _react2.default.createElement(_selectedMsg2.default, { id: this.props.msg.id })
 	        )
 	      );
 	    }
@@ -43941,7 +43927,7 @@
 /* 658 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -43973,6 +43959,10 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	var Horizon = __webpack_require__(660);
+	var horizon = Horizon({ secure: false });
+	var chat = horizon('messages_msgBoard');
+
 	var SelectedMsg = function (_React$Component) {
 	  (0, _inherits3.default)(SelectedMsg, _React$Component);
 
@@ -43983,20 +43973,42 @@
 
 	    _this.props = props;
 
+	    _this.handleOnSelect = _this.handleOnSelect.bind(_this);
+
 	    _this.state = {
-	      msgSelected: _this.props.msgSelected
+	      msgSelected: false
 	    };
 	    return _this;
 	  }
 
 	  (0, _createClass3.default)(SelectedMsg, [{
-	    key: "render",
+	    key: 'handleOnSelect',
+	    value: function handleOnSelect() {
+	      var selected = {
+	        id: this.props.id,
+	        msgSelected: false
+	      };
+
+	      var unSelected = {
+	        id: this.props.id,
+	        msgSelected: true
+	      };
+
+	      var msgSelectionStatus = this.state.msgSelected ? selected : unSelected;
+
+	      chat.update(msgSelectionStatus);
+	      this.setState({
+	        msgSelected: !this.state.msgSelected
+	      });
+	    }
+	  }, {
+	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
-	        "button",
-	        { className: "btn btn-success",
+	        'button',
+	        { className: 'btn btn-success',
 	          onClick: this.props.selectMsg },
-	        "O"
+	        'O'
 	      );
 	    }
 	  }]);

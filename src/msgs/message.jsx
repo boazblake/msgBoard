@@ -2,45 +2,33 @@ import React, { Component } from 'react';
 import Moment from 'moment';
 import SelectedMsg from './selectedMsg';
 import RemoveMsg from './removeMsg';
-const Horizon = require('@horizon/client');
-const horizon = Horizon({ secure: false });
-const chat = horizon('messages_msgBoard');
+
 
 export default class Message extends Component {
   constructor(props){
     super(props);
     let msgStatus = (this.props.msg.msgSelected);
-    let bkgColor = (msgStatus) ? '#3498db' : '#bdc3c7';
 
     this.state = {
       msgStatus: msgStatus,
-      bkgColor: bkgColor
     }      
-
-    this.handleOnSelect = this.handleOnSelect.bind(this);
   }
 
-  handleOnSelect() {
-    let selected = {
-        id:this.props.msg.id,
-        msgSelected: false
-      }
+  componentWillReceiveProps(nextProps){
+    console.log('nextProps>>>', nextProps)
+    let msgStatus = (nextProps.msgSelected);
+    let bkgColor = (msgStatus) ? '#3498db' : '#bdc3c7';
 
-      let unSelected = {
-        id:this.props.msg.id,
-        msgSelected: true
-      }
-
-    let msgSelectionStatus = (this.state.msgStatus) ? selected : unSelected
-    chat.update(msgSelectionStatus);
-    this.setState({
-      msgStatus: (!this.state.msgStatus)
-    })
+    this.setState = {
+      msgStatus: msgStatus,
+    }
   }
 
   render() { 
+    let bkgColor = (this.props.msg.msgSelected) ? '#3498db' : '#bdc3c7';
+
     let divStyle =  {
-      backgroundColor: this.state.bkgColor
+      backgroundColor: this.props.bkgColor
     }
 
     return (
@@ -57,7 +45,7 @@ export default class Message extends Component {
         </div>
         <div className="col-xs-2 center">
           <RemoveMsg id={this.props.msg.id}/>
-          <SelectedMsg selectMsg={this.handleOnSelect} msgSelected={this.state.msgStatus}/>
+          <SelectedMsg id={this.props.msg.id}/>
         </div>
       </div>
     );
