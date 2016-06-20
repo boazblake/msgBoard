@@ -39,8 +39,10 @@ export default class Message extends Component {
   }
 
   render() { 
+    let bkgColor = (this.props.msg.msgSelected) ? '#3498db' : '#bdc3c7';
+
     let divStyle =  {
-      backgroundColor: this.state.bkgColor
+      backgroundColor: bkgColor
     }
 
     return (

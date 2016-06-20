@@ -10,6 +10,12 @@ export default class SelectedMsg extends React.Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      msgSelected: nextProps.msgSelected
+    })
+  }
+
   render(){   
     return(
       <button className="btn btn-success"

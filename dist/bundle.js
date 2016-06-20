@@ -30108,8 +30108,10 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var bkgColor = this.props.msg.msgSelected ? '#3498db' : '#bdc3c7';
+
 	      var divStyle = {
-	        backgroundColor: this.state.bkgColor
+	        backgroundColor: bkgColor
 	      };
 
 	      return _react2.default.createElement(
@@ -43990,6 +43992,13 @@
 	  }
 
 	  (0, _createClass3.default)(SelectedMsg, [{
+	    key: "componentWillReceiveProps",
+	    value: function componentWillReceiveProps(nextProps) {
+	      this.setState({
+	        msgSelected: nextProps.msgSelected
+	      });
+	    }
+	  }, {
 	    key: "render",
 	    value: function render() {
 	      return _react2.default.createElement(
