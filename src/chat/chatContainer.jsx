@@ -58,7 +58,6 @@ export default class ChatContainer extends React.Component {
     chat.store(message);
   }
 
-  //passing chat as a prop to messages_msgBoard component for querying the db for messages_msgBoard
 
 
 

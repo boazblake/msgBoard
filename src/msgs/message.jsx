@@ -10,9 +10,7 @@ export default class Message extends Component {
   constructor(props){
     super(props);
     let msgStatus = this.props.msg.msgSelected;
-    let bkgColor;
-    if (msgStatus) bkgColor = '#3498db';
-    if (!msgStatus) bkgColor = '#bdc3c7';
+    let bkgColor = (msgStatus) ? '#3498db' : '#bdc3c7';
 
     this.state = {
       msgStatus: msgStatus,
@@ -23,20 +21,33 @@ export default class Message extends Component {
   }
 
   handleOnSelect() {
-    
-    if (this.state.msgStatus){
-      console.log(this.state.msgStatus)
-      chat.upsert({
+
+    let selected = {
         id:this.props.msg.id,
         msgSelected: false
-      })
-    } else {
-      console.log(this.state.msgStatus)
-      chat.upsert({
+      }
+
+      let unSelected = {
         id:this.props.msg.id,
         msgSelected: true
-      })
-    }
+      }
+
+    let msgSelectionStatus = (this.state.msgStatus) ? selected : unSelected
+    chat.upsert(msgSelectionStatus);
+
+    // if (this.state.msgStatus){
+    //   console.log(this.state.msgStatus)
+    //   chat.upsert({
+    //     id:this.props.msg.id,
+    //     msgSelected: false
+    //   })
+    // } else {
+    //   console.log(this.state.msgStatus)
+    //   chat.upsert({
+    //     id:this.props.msg.id,
+    //     msgSelected: true
+    //   })
+    // }
   }
 
   render() { 

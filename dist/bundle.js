@@ -28388,6 +28388,7 @@
 	      var _this2 = this;
 
 	      chat.watch().subscribe(function (messages_msgBoard) {
+	        console.log('watch subscribe');
 	        var allMSGS = messages_msgBoard.sort(function (a, b) {
 	          return b.date - a.date;
 	        });
@@ -28396,6 +28397,9 @@
 	        console.log(err);
 	      });
 	    }
+
+	    //passing the message as a prop to the messages component for querying the db for messages_msgBoard
+
 	  }, {
 	    key: 'render',
 	    value: function render() {
@@ -30071,9 +30075,7 @@
 	    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(Message).call(this, props));
 
 	    var msgStatus = _this.props.msg.msgSelected;
-	    var bkgColor = void 0;
-	    if (msgStatus) bkgColor = '#3498db';
-	    if (!msgStatus) bkgColor = '#bdc3c7';
+	    var bkgColor = msgStatus ? '#3498db' : '#bdc3c7';
 
 	    _this.state = {
 	      msgStatus: msgStatus,
@@ -30088,18 +30090,32 @@
 	    key: 'handleOnSelect',
 	    value: function handleOnSelect() {
 
-	      if (this.state.msgStatus) {
-	        console.log();
-	        return chat.upsert({
-	          id: this.props.msg.id,
-	          msgSelected: false
-	        });
-	      } else {
-	        return chat.upsert({
-	          id: this.props.msg.id,
-	          msgSelected: true
-	        });
-	      }
+	      var selected = {
+	        id: this.props.msg.id,
+	        msgSelected: false
+	      };
+
+	      var unSelected = {
+	        id: this.props.msg.id,
+	        msgSelected: true
+	      };
+
+	      var msgSelectionStatus = this.state.msgStatus ? selected : unSelected;
+	      chat.upsert(msgSelectionStatus);
+
+	      // if (this.state.msgStatus){
+	      //   console.log(this.state.msgStatus)
+	      //   chat.upsert({
+	      //     id:this.props.msg.id,
+	      //     msgSelected: false
+	      //   })
+	      // } else {
+	      //   console.log(this.state.msgStatus)
+	      //   chat.upsert({
+	      //     id:this.props.msg.id,
+	      //     msgSelected: true
+	      //   })
+	      // }
 	    }
 	  }, {
 	    key: 'render',
@@ -55092,9 +55108,6 @@
 	      //the store methos will take the new message and store in the rethink DBcollection
 	      chat.store(message);
 	    }
-
-	    //passing chat as a prop to messages_msgBoard component for querying the db for messages_msgBoard
-
 	  }, {
 	    key: 'render',
 	    value: function render() {

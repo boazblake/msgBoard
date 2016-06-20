@@ -22,6 +22,7 @@ constructor(props){
 componentDidMount() {
   chat.watch().subscribe(
     (messages_msgBoard) => {
+      console.log('watch subscribe')
       let allMSGS = messages_msgBoard.sort((a, b) => {
         return b.date - a.date;
       })
@@ -30,6 +31,9 @@ componentDidMount() {
     (err) => {console.log(err);}
   );
 }
+
+  //passing the message as a prop to the messages component for querying the db for messages_msgBoard
+
   render(){
     return (
       <div>
