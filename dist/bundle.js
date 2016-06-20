@@ -30089,7 +30089,6 @@
 	  (0, _createClass3.default)(Message, [{
 	    key: 'handleOnSelect',
 	    value: function handleOnSelect() {
-
 	      var selected = {
 	        id: this.props.msg.id,
 	        msgSelected: false
@@ -30101,21 +30100,10 @@
 	      };
 
 	      var msgSelectionStatus = this.state.msgStatus ? selected : unSelected;
-	      chat.upsert(msgSelectionStatus);
-
-	      // if (this.state.msgStatus){
-	      //   console.log(this.state.msgStatus)
-	      //   chat.upsert({
-	      //     id:this.props.msg.id,
-	      //     msgSelected: false
-	      //   })
-	      // } else {
-	      //   console.log(this.state.msgStatus)
-	      //   chat.upsert({
-	      //     id:this.props.msg.id,
-	      //     msgSelected: true
-	      //   })
-	      // }
+	      chat.update(msgSelectionStatus);
+	      this.setState({
+	        msgStatus: !this.state.msgStatus
+	      });
 	    }
 	  }, {
 	    key: 'render',
@@ -30146,7 +30134,7 @@
 	          'div',
 	          { className: 'col-xs-2 center' },
 	          _react2.default.createElement(_removeMsg2.default, { id: this.props.msg.id }),
-	          _react2.default.createElement(_selectedMsg2.default, { selectMsg: this.handleOnSelect, msgSelected: this.state.selected })
+	          _react2.default.createElement(_selectedMsg2.default, { selectMsg: this.handleOnSelect, msgSelected: this.state.msgStatus })
 	        )
 	      );
 	    }

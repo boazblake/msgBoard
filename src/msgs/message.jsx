@@ -9,7 +9,7 @@ const chat = horizon('messages_msgBoard');
 export default class Message extends Component {
   constructor(props){
     super(props);
-    let msgStatus = this.props.msg.msgSelected;
+    let msgStatus = (this.props.msg.msgSelected);
     let bkgColor = (msgStatus) ? '#3498db' : '#bdc3c7';
 
     this.state = {
@@ -21,7 +21,6 @@ export default class Message extends Component {
   }
 
   handleOnSelect() {
-
     let selected = {
         id:this.props.msg.id,
         msgSelected: false
@@ -33,21 +32,10 @@ export default class Message extends Component {
       }
 
     let msgSelectionStatus = (this.state.msgStatus) ? selected : unSelected
-    chat.upsert(msgSelectionStatus);
-
-    // if (this.state.msgStatus){
-    //   console.log(this.state.msgStatus)
-    //   chat.upsert({
-    //     id:this.props.msg.id,
-    //     msgSelected: false
-    //   })
-    // } else {
-    //   console.log(this.state.msgStatus)
-    //   chat.upsert({
-    //     id:this.props.msg.id,
-    //     msgSelected: true
-    //   })
-    // }
+    chat.update(msgSelectionStatus);
+    this.setState({
+      msgStatus: (!this.state.msgStatus)
+    })
   }
 
   render() { 
@@ -69,7 +57,7 @@ export default class Message extends Component {
         </div>
         <div className="col-xs-2 center">
           <RemoveMsg id={this.props.msg.id}/>
-          <SelectedMsg selectMsg={this.handleOnSelect} msgSelected={this.state.selected}/>
+          <SelectedMsg selectMsg={this.handleOnSelect} msgSelected={this.state.msgStatus}/>
         </div>
       </div>
     );
