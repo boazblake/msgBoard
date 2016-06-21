@@ -19,7 +19,9 @@ export default class SelectedMsg extends React.Component {
   render(){   
     return(
       <button className="btn btn-success"
-              onClick={this.props.selectMsg}>O</button>
+              onClick={this.props.selectMsg}>
+                <span className="glyphicon glyphicon-check"></span>
+              </button>
     )
   }
 }

@@ -1,9 +1,18 @@
-.body:focus {
+.body:onFocus {
   outline: none;
 }
 .center {
+  width:400px;
   margin: auto;
-  border: 1px solid magenta;
-  border-radius: 2px;
   padding: 10px;
+  align-content: center;
+}
+
+.row{
+  display: inline-block;
+  margin: 2%;
+  width: 400px;
+  border-radius: 20px;
+  color: white;
+  font-size: 2em;
 }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Moment from 'moment';
 import SelectedMsg from './selectedMsg';
 import RemoveMsg from './removeMsg';
+
 const Horizon = require('@horizon/client');
 const horizon = Horizon({ secure: false });
 const chat = horizon('messages_msgBoard');

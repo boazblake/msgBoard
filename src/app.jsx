@@ -5,7 +5,8 @@ import ChatContainer from './chat/chatContainer';
 
 //Include our nwly installed horizon client
 const Horizon = require('@horizon/client');
-const horizon = Horizon({ secure: false });
+const horizon = Horizon();
+
 
 //This init the 'messages_msgBoard' collection inside of the ReThinkDb
 let chat = horizon('messages_msgBoard');
